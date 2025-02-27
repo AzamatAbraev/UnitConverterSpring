@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weight Converter</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<h1>Weight Converter</h1>
+
+<form th:action="@{/unit/convertWeight}" method="post">
+    <label>Enter the weight to convert:</label>
+    <input type="number" name="weightValue" required />
+
+    <label for="weightFrom">From:</label>
+    <select id="weightFrom" name="weightUnitFrom">
+        <option th:each="unit : ${weightUnits}" th:value="${unit}" th:text="${unit}">default</option>
+    </select>
+
+    <label for="weightTo">To:</label>
+    <select id="weightTo" name="weightUnitTo">
+        <option th:each="unit : ${weightUnits}" th:value="${unit}" th:text="${unit}">default</option>
+    </select>
+
+    <button type="submit">Convert</button>
+</form>
+
+<h2>Result of your calculation</h2>
+<p th:if="${convertedValue != null}" th:text="${originalValue + ' ' + originalUnit + ' = ' + convertedValue + ' ' + convertedUnit}"></p>
+
+</body>
+</html>

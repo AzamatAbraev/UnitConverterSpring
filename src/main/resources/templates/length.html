@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Length Converter</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<h1>Length Converter</h1>
+
+<form th:action="@{/unit/convertLength}" method="post">
+    <label>Enter the length to convert:</label>
+    <input type="number" name="lengthValue" required />
+
+    <label for="lengthFrom">From:</label>
+    <select id="lengthFrom" name="lengthUnitFrom">
+        <option th:each="unit : ${lengthUnits}" th:value="${unit}" th:text="${unit}">default</option>
+    </select>
+
+    <label for="lengthTo">To:</label>
+    <select id="lengthTo" name="lengthUnitTo">
+        <option th:each="unit : ${lengthUnits}" th:value="${unit}" th:text="${unit}">default</option>
+    </select>
+
+    <button type="submit">Convert</button>
+</form>
+
+<h2>Result of your calculation</h2>
+<p th:if="${convertedValue != null}" th:text="${originalValue + ' ' + originalUnit + ' = ' + convertedValue + ' ' + convertedUnit}"></p>
+
+</body>
+</html>
